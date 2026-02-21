@@ -14,6 +14,12 @@ export default defineManifest({
     'https://chat.deepseek.com/*',
     'https://chatgpt.com/*',
     'https://claude.ai/*',
+    'https://kimi.moonshot.cn/*',
+    'https://tongyi.aliyun.com/*',
+    'https://www.doubao.com/*',
+    'https://doubao.com/*',
+    'https://www.tiangong.cn/*',
+    'https://tiangong.cn/*',
   ],
   action: {
     default_popup: 'src/popup/index.html',
@@ -38,6 +44,26 @@ export default defineManifest({
     {
       matches: ['https://chat.deepseek.com/*'],
       js: ['src/content/deepseek.ts'],
+      run_at: 'document_idle',
+    },
+    {
+      matches: ['https://kimi.moonshot.cn/*'],
+      js: ['src/content/kimi.ts'],
+      run_at: 'document_idle',
+    },
+    {
+      matches: ['https://tongyi.aliyun.com/*'],
+      js: ['src/content/qianwen.ts'],
+      run_at: 'document_idle',
+    },
+    {
+      matches: ['https://www.doubao.com/*', 'https://doubao.com/*'],
+      js: ['src/content/doubao.ts'],
+      run_at: 'document_idle',
+    },
+    {
+      matches: ['https://www.tiangong.cn/*', 'https://tiangong.cn/*'],
+      js: ['src/content/tiangong.ts'],
       run_at: 'document_idle',
     },
   ],

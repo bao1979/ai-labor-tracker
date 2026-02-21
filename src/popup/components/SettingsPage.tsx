@@ -8,10 +8,14 @@ interface SettingsPageProps {
   onClearData: () => void;
 }
 
-const PLATFORMS: { id: AIPlatform; name: string; color: string }[] = [
-  { id: 'deepseek', name: 'DeepSeek', color: 'bg-deepseek-500' },
-  { id: 'chatgpt', name: 'ChatGPT', color: 'bg-green-500' },
-  { id: 'claude', name: 'Claude', color: 'bg-orange-500' },
+const PLATFORMS: { id: AIPlatform; name: string; nameZh: string; color: string }[] = [
+  { id: 'deepseek', name: 'DeepSeek', nameZh: 'DeepSeek', color: 'bg-deepseek-500' },
+  { id: 'chatgpt', name: 'ChatGPT', nameZh: 'ChatGPT', color: 'bg-green-500' },
+  { id: 'claude', name: 'Claude', nameZh: 'Claude', color: 'bg-orange-500' },
+  { id: 'kimi', name: 'Kimi', nameZh: 'Kimi (月之暗面)', color: 'bg-blue-500' },
+  { id: 'qianwen', name: 'Qianwen', nameZh: '通义千问', color: 'bg-purple-500' },
+  { id: 'doubao', name: 'Doubao', nameZh: '豆包', color: 'bg-cyan-500' },
+  { id: 'tiangong', name: 'Tiangong', nameZh: '天工', color: 'bg-indigo-500' },
 ];
 
 export function SettingsPage({ settings, onSettingsUpdate, onClearData }: SettingsPageProps) {
@@ -113,7 +117,7 @@ export function SettingsPage({ settings, onSettingsUpdate, onClearData }: Settin
             <div key={platform.id} className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className={`w-2 h-2 rounded-full ${platform.color}`} />
-                <span className="text-sm text-gray-300">{platform.name}</span>
+                <span className="text-sm text-gray-300">{language === 'zh' ? platform.nameZh : platform.name}</span>
               </div>
               <Toggle
                 enabled={settings.enabledPlatforms[platform.id] ?? true}

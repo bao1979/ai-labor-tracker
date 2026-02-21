@@ -84,6 +84,18 @@ export const en = {
     chinese: '中文',
   },
 
+  // Platform names
+  platforms: {
+    deepseek: 'DeepSeek',
+    chatgpt: 'ChatGPT',
+    claude: 'Claude',
+    kimi: 'Kimi',
+    qianwen: 'Qianwen',
+    doubao: 'Doubao',
+    tiangong: 'Tiangong',
+    other: 'Other',
+  },
+
   // Stats Overview
   stats: {
     today: 'Today',

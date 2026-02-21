@@ -23,6 +23,30 @@ export const PLATFORM_PRICING: Record<AIPlatform, PlatformPricing> = {
     outputTokenCostPer1k: 0.015,
     currency: 'USD',
   },
+  kimi: {
+    platform: 'kimi',
+    inputTokenCostPer1k: 0.00012, // Kimi/Moonshot pricing estimate
+    outputTokenCostPer1k: 0.00012,
+    currency: 'USD',
+  },
+  qianwen: {
+    platform: 'qianwen',
+    inputTokenCostPer1k: 0.0004, // Qianwen/通义千问 pricing estimate
+    outputTokenCostPer1k: 0.0012,
+    currency: 'USD',
+  },
+  doubao: {
+    platform: 'doubao',
+    inputTokenCostPer1k: 0.0001, // Doubao/豆包 pricing estimate
+    outputTokenCostPer1k: 0.0002,
+    currency: 'USD',
+  },
+  tiangong: {
+    platform: 'tiangong',
+    inputTokenCostPer1k: 0.0002, // Tiangong/天工 pricing estimate
+    outputTokenCostPer1k: 0.0004,
+    currency: 'USD',
+  },
   other: {
     platform: 'other',
     inputTokenCostPer1k: 0.001,
@@ -84,6 +108,10 @@ export function getPlatformDisplayName(platform: AIPlatform): string {
     deepseek: 'DeepSeek',
     chatgpt: 'ChatGPT',
     claude: 'Claude',
+    kimi: 'Kimi',
+    qianwen: 'Qianwen/千问',
+    doubao: 'Doubao/豆包',
+    tiangong: 'Tiangong/天工',
     other: 'Other',
   };
   return names[platform];
