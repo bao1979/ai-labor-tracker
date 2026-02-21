@@ -1,11 +1,21 @@
-# AI Labor Tracker - Placeholder Icons
+# AI 劳动记录器 - 图标占位文件
 
-These placeholder icon files need to be replaced with actual PNG icons before publishing the extension.
+这些是占位图标文件，在发布扩展之前需要替换为实际的 PNG 图标。
 
-Required sizes:
-- icon16.png (16x16 pixels)
-- icon32.png (32x32 pixels)
-- icon48.png (48x48 pixels)
-- icon128.png (128x128 pixels)
+## 所需尺寸
 
-Recommended: Use a tool like Figma, Photoshop, or an online icon generator to create consistent icons with the AI Labor Tracker branding.
+- icon16.png（16x16 像素）
+- icon32.png（32x32 像素）
+- icon48.png（48x48 像素）
+- icon128.png（128x128 像素）
+
+## 建议
+
+建议使用 Figma、Photoshop 或在线图标生成工具创建符合 AI 劳动记录器品牌风格的统一图标。
+
+## 图标设计指南
+
+- 保持简洁明了的设计风格
+- 使用与扩展主题一致的配色方案
+- 确保在小尺寸下也能清晰辨识
+- 建议使用 SVG 源文件导出各尺寸 PNG

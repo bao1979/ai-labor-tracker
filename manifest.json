@@ -1,9 +1,9 @@
 {
   "$schema": "https://json.schemastore.org/chrome-manifest.json",
   "manifest_version": 3,
-  "name": "AI Labor Tracker",
+  "name": "AI 劳动记录器",
   "version": "0.1.0",
-  "description": "Track your AI interactions, estimate labor value, and export usage data",
+  "description": "追踪您的 AI 交互，估算劳动价值，并导出使用数据",
   "permissions": [
     "storage",
     "activeTab",

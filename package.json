@@ -1,7 +1,7 @@
 {
   "name": "ai-labor-tracker",
   "version": "0.1.0",
-  "description": "AI Labor Tracker - Edge browser extension for tracking AI interactions",
+  "description": "AI 劳动记录器 - 用于追踪和量化 AI 交互劳动价值的浏览器扩展，支持 DeepSeek、ChatGPT、Claude 等平台",
   "type": "module",
   "scripts": {
     "dev": "vite",
