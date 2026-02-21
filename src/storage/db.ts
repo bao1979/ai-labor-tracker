@@ -40,7 +40,7 @@ export const DEFAULT_PREFERENCES: UserPreferences = {
   hourlyRate: 50, // Default hourly rate in USD
   currency: 'USD',
   trackingEnabled: true,
-  platforms: ['deepseek', 'chatgpt', 'claude'],
+  platforms: ['deepseek', 'chatgpt', 'claude', 'kimi', 'qianwen', 'doubao', 'tiangong'],
 };
 
 /**
@@ -52,6 +52,10 @@ export const DEFAULT_SETTINGS: Settings = {
     deepseek: true,
     chatgpt: true,
     claude: true,
+    kimi: true,
+    qianwen: true,
+    doubao: true,
+    tiangong: true,
     other: false,
   },
   dataRetentionDays: 90,

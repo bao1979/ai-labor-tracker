@@ -86,6 +86,18 @@ export const zh: Translations = {
     chinese: '中文',
   },
 
+  // Platform names
+  platforms: {
+    deepseek: 'DeepSeek',
+    chatgpt: 'ChatGPT',
+    claude: 'Claude',
+    kimi: 'Kimi (月之暗面)',
+    qianwen: '通义千问',
+    doubao: '豆包',
+    tiangong: '天工',
+    other: '其他',
+  },
+
   // Stats Overview
   stats: {
     today: '今日',

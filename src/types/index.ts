@@ -17,7 +17,7 @@ export interface AISession {
 /**
  * Supported AI platforms
  */
-export type AIPlatform = 'deepseek' | 'chatgpt' | 'claude' | 'other';
+export type AIPlatform = 'deepseek' | 'chatgpt' | 'claude' | 'kimi' | 'qianwen' | 'doubao' | 'tiangong' | 'other';
 
 /**
  * Labor record - represents a single captured AI interaction

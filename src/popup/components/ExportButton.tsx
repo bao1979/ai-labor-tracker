@@ -34,7 +34,7 @@ export function ExportButton({ records = [] }: ExportButtonProps) {
         hourlyRate: 50,
         currency: 'USD',
         trackingEnabled: true,
-        platforms: ['deepseek', 'chatgpt', 'claude'],
+        platforms: ['deepseek', 'chatgpt', 'claude', 'kimi', 'qianwen', 'doubao', 'tiangong'],
       };
 
       if (format === 'json') {
