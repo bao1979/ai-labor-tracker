@@ -13,12 +13,12 @@ import type {
   Settings,
   StatsResponse,
   LaborRecord,
+  UserPreferences,
 } from '@/types';
 import { 
   createSession, 
   updateSession, 
   getAllSessions, 
-  getAllDailyStats, 
   updateDailyStats,
   getPreferences,
   updatePreferences,
@@ -80,7 +80,7 @@ async function handleMessage(message: Message): Promise<unknown> {
       return handleToggleTracking(message.payload as { enabled: boolean });
     
     case 'UPDATE_PREFERENCES':
-      return handleUpdatePreferences(message.payload as Partial<typeof import('@/types').UserPreferences>);
+      return handleUpdatePreferences(message.payload as Partial<UserPreferences>);
     
     case 'ADD_LABOR_RECORD':
       return handleAddLaborRecord(message.payload as AddLaborRecordPayload);
@@ -242,7 +242,7 @@ async function handleToggleTracking(payload: { enabled: boolean }): Promise<void
  * Update user preferences
  */
 async function handleUpdatePreferences(
-  payload: Partial<typeof import('@/types').UserPreferences>
+  payload: Partial<UserPreferences>
 ): Promise<void> {
   await updatePreferences(payload);
   console.log('[AI Labor Tracker] Preferences updated');
