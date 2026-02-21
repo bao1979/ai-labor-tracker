@@ -1,11 +1,14 @@
 import type { DailyStats } from '@/types';
 import { formatTokenCount, formatCurrency } from '@/utils';
+import { useLanguage } from '../i18n';
 
 interface StatsOverviewProps {
   dailyStats: DailyStats[];
 }
 
 export function StatsOverview({ dailyStats }: StatsOverviewProps) {
+  const { t } = useLanguage();
+  
   // Calculate totals from all daily stats
   const totals = dailyStats.reduce(
     (acc, stat) => ({
@@ -34,25 +37,25 @@ export function StatsOverview({ dailyStats }: StatsOverviewProps) {
     <div className="space-y-4">
       {/* Today's Stats */}
       <div className="bg-tracker-card rounded-lg p-4">
-        <h2 className="text-sm font-medium text-gray-400 mb-3">Today</h2>
+        <h2 className="text-sm font-medium text-gray-400 mb-3">{t.stats.today}</h2>
         <div className="grid grid-cols-2 gap-3">
           <StatCard
-            label="Tokens"
+            label={t.stats.tokens}
             value={formatTokenCount(todayTotals.tokens)}
-            subValue={`${todayTotals.sessions} sessions`}
+            subValue={`${todayTotals.sessions} ${t.common.sessions}`}
           />
           <StatCard
-            label="Est. Cost"
+            label={t.stats.estCost}
             value={formatCurrency(todayTotals.cost)}
             highlight
           />
           <StatCard
-            label="Labor Value"
+            label={t.stats.laborValue}
             value={formatCurrency(todayTotals.laborValue)}
-            subValue="if done manually"
+            subValue={t.stats.ifDoneManually}
           />
           <StatCard
-            label="Savings"
+            label={t.stats.savings}
             value={formatCurrency(Math.max(0, todayTotals.laborValue - todayTotals.cost))}
             highlight
           />
@@ -61,23 +64,23 @@ export function StatsOverview({ dailyStats }: StatsOverviewProps) {
 
       {/* All-Time Stats */}
       <div className="bg-tracker-card rounded-lg p-4">
-        <h2 className="text-sm font-medium text-gray-400 mb-3">All Time</h2>
+        <h2 className="text-sm font-medium text-gray-400 mb-3">{t.stats.allTime}</h2>
         <div className="grid grid-cols-2 gap-3">
           <StatCard
-            label="Total Tokens"
+            label={t.stats.totalTokens}
             value={formatTokenCount(totals.tokens)}
-            subValue={`${totals.sessions} sessions`}
+            subValue={`${totals.sessions} ${t.common.sessions}`}
           />
           <StatCard
-            label="Total Cost"
+            label={t.stats.totalCost}
             value={formatCurrency(totals.cost)}
           />
           <StatCard
-            label="Total Labor Value"
+            label={t.stats.totalLaborValue}
             value={formatCurrency(totals.laborValue)}
           />
           <StatCard
-            label="Total Savings"
+            label={t.stats.totalSavings}
             value={formatCurrency(Math.max(0, totals.laborValue - totals.cost))}
             highlight
           />

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { Settings, AIPlatform } from '@/types';
+import { useLanguage, type Language } from '../i18n';
 
 interface SettingsPageProps {
   settings: Settings;
@@ -14,6 +15,7 @@ const PLATFORMS: { id: AIPlatform; name: string; color: string }[] = [
 ];
 
 export function SettingsPage({ settings, onSettingsUpdate, onClearData }: SettingsPageProps) {
+  const { t, language, setLanguage } = useLanguage();
   const [showClearConfirm, setShowClearConfirm] = useState(false);
   const [retentionDays, setRetentionDays] = useState(settings.dataRetentionDays.toString());
 
@@ -49,17 +51,54 @@ export function SettingsPage({ settings, onSettingsUpdate, onClearData }: Settin
     setShowClearConfirm(false);
   };
 
+  const handleLanguageChange = (lang: Language) => {
+    setLanguage(lang);
+  };
+
   return (
     <div className="p-4 space-y-4">
+      {/* Language Settings */}
+      <section className="bg-tracker-card rounded-lg p-4 space-y-4">
+        <h3 className="text-sm font-medium text-white">{t.settings.language}</h3>
+        <div className="flex items-center justify-between">
+          <div>
+            <div className="text-sm text-white">{t.settings.language}</div>
+            <div className="text-xs text-gray-500">{t.settings.languageDescription}</div>
+          </div>
+          <div className="flex gap-2">
+            <button
+              onClick={() => handleLanguageChange('en')}
+              className={`px-3 py-1.5 text-xs rounded-lg transition-colors ${
+                language === 'en'
+                  ? 'bg-primary-500 text-white'
+                  : 'bg-tracker-accent text-gray-400 hover:text-white'
+              }`}
+            >
+              {t.settings.english}
+            </button>
+            <button
+              onClick={() => handleLanguageChange('zh')}
+              className={`px-3 py-1.5 text-xs rounded-lg transition-colors ${
+                language === 'zh'
+                  ? 'bg-primary-500 text-white'
+                  : 'bg-tracker-accent text-gray-400 hover:text-white'
+              }`}
+            >
+              {t.settings.chinese}
+            </button>
+          </div>
+        </div>
+      </section>
+
       {/* Capture Settings */}
       <section className="bg-tracker-card rounded-lg p-4 space-y-4">
-        <h3 className="text-sm font-medium text-white">Capture Settings</h3>
+        <h3 className="text-sm font-medium text-white">{t.settings.captureSettings}</h3>
         
         {/* Main Toggle */}
         <div className="flex items-center justify-between">
           <div>
-            <div className="text-sm text-white">Enable Capture</div>
-            <div className="text-xs text-gray-500">Track AI interactions automatically</div>
+            <div className="text-sm text-white">{t.settings.enableCapture}</div>
+            <div className="text-xs text-gray-500">{t.settings.trackAutomatically}</div>
           </div>
           <Toggle
             enabled={settings.captureEnabled}
@@ -69,7 +108,7 @@ export function SettingsPage({ settings, onSettingsUpdate, onClearData }: Settin
         
         {/* Platform Toggles */}
         <div className="pt-3 border-t border-tracker-accent space-y-3">
-          <div className="text-xs text-gray-400">Enabled Platforms</div>
+          <div className="text-xs text-gray-400">{t.settings.enabledPlatforms}</div>
           {PLATFORMS.map(platform => (
             <div key={platform.id} className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -88,13 +127,13 @@ export function SettingsPage({ settings, onSettingsUpdate, onClearData }: Settin
       
       {/* Data Settings */}
       <section className="bg-tracker-card rounded-lg p-4 space-y-4">
-        <h3 className="text-sm font-medium text-white">Data Settings</h3>
+        <h3 className="text-sm font-medium text-white">{t.settings.dataSettings}</h3>
         
         {/* Retention Days */}
         <div className="flex items-center justify-between">
           <div>
-            <div className="text-sm text-white">Data Retention</div>
-            <div className="text-xs text-gray-500">Days to keep records</div>
+            <div className="text-sm text-white">{t.settings.dataRetention}</div>
+            <div className="text-xs text-gray-500">{t.settings.daysToKeep}</div>
           </div>
           <div className="flex items-center gap-2">
             <input
@@ -106,7 +145,7 @@ export function SettingsPage({ settings, onSettingsUpdate, onClearData }: Settin
               onBlur={handleRetentionBlur}
               className="w-16 px-2 py-1 bg-tracker-accent border border-tracker-accent rounded text-sm text-white text-center focus:outline-none focus:border-primary-500"
             />
-            <span className="text-xs text-gray-500">days</span>
+            <span className="text-xs text-gray-500">{t.common.days}</span>
           </div>
         </div>
         
@@ -117,25 +156,25 @@ export function SettingsPage({ settings, onSettingsUpdate, onClearData }: Settin
               onClick={() => setShowClearConfirm(true)}
               className="w-full py-2 px-4 bg-red-500/10 text-red-400 rounded-lg text-sm font-medium hover:bg-red-500/20 transition-colors"
             >
-              Clear All Data
+              {t.settings.clearAllData}
             </button>
           ) : (
             <div className="space-y-2">
               <p className="text-xs text-red-400 text-center">
-                This will permanently delete all records. Are you sure?
+                {t.settings.clearConfirmMessage}
               </p>
               <div className="flex gap-2">
                 <button
                   onClick={() => setShowClearConfirm(false)}
                   className="flex-1 py-2 px-4 bg-tracker-accent text-gray-300 rounded-lg text-sm hover:bg-opacity-80 transition-colors"
                 >
-                  Cancel
+                  {t.common.cancel}
                 </button>
                 <button
                   onClick={handleClearData}
                   className="flex-1 py-2 px-4 bg-red-500 text-white rounded-lg text-sm font-medium hover:bg-red-600 transition-colors"
                 >
-                  Delete All
+                  {t.settings.deleteAll}
                 </button>
               </div>
             </div>
@@ -145,21 +184,20 @@ export function SettingsPage({ settings, onSettingsUpdate, onClearData }: Settin
       
       {/* About */}
       <section className="bg-tracker-card rounded-lg p-4">
-        <h3 className="text-sm font-medium text-white mb-3">About</h3>
+        <h3 className="text-sm font-medium text-white mb-3">{t.settings.about}</h3>
         <div className="space-y-2 text-xs text-gray-400">
           <div className="flex justify-between">
-            <span>Version</span>
+            <span>{t.settings.version}</span>
             <span className="text-gray-300">0.1.0</span>
           </div>
           <div className="flex justify-between">
-            <span>Developer</span>
-            <span className="text-gray-300">AI Labor Tracker</span>
+            <span>{t.settings.developer}</span>
+            <span className="text-gray-300">{t.settings.developerName}</span>
           </div>
         </div>
         <div className="mt-3 pt-3 border-t border-tracker-accent">
           <p className="text-xs text-gray-500">
-            Track your AI interactions, estimate token usage, and export your data.
-            All data is stored locally on your device.
+            {t.settings.aboutDescription}
           </p>
         </div>
       </section>

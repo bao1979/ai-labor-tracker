@@ -1,8 +1,12 @@
+import { useLanguage, interpolate } from '../i18n';
+
 interface HeaderProps {
   activeSessions: number;
 }
 
 export function Header({ activeSessions }: HeaderProps) {
+  const { t } = useLanguage();
+  
   return (
     <header className="flex items-center justify-between p-4 bg-tracker-card border-b border-tracker-accent">
       <div className="flex items-center gap-3">
@@ -12,8 +16,8 @@ export function Header({ activeSessions }: HeaderProps) {
           </svg>
         </div>
         <div>
-          <h1 className="text-base font-bold text-white">AI Labor Tracker</h1>
-          <p className="text-xs text-gray-500">Track your AI interactions</p>
+          <h1 className="text-base font-bold text-white">{t.header.title}</h1>
+          <p className="text-xs text-gray-500">{t.header.subtitle}</p>
         </div>
       </div>
       
@@ -21,7 +25,7 @@ export function Header({ activeSessions }: HeaderProps) {
         <div className="flex items-center gap-1.5 px-2.5 py-1 bg-tracker-success/10 rounded-full">
           <span className="w-2 h-2 bg-tracker-success rounded-full animate-pulse"></span>
           <span className="text-xs text-tracker-success font-medium">
-            {activeSessions} active
+            {interpolate(t.header.activeCount, { count: activeSessions })}
           </span>
         </div>
       )}

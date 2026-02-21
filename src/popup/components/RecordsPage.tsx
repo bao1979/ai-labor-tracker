@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import type { LaborRecord, AIPlatform } from '@/types';
 import { formatTokenCount, getPlatformDisplayName } from '@/utils';
+import { useLanguage, interpolate } from '../i18n';
 
 interface RecordsPageProps {
   records: LaborRecord[];
@@ -9,6 +10,7 @@ interface RecordsPageProps {
 }
 
 export function RecordsPage({ records, onDeleteRecord, onRefresh }: RecordsPageProps) {
+  const { t } = useLanguage();
   const [searchQuery, setSearchQuery] = useState('');
   const [platformFilter, setPlatformFilter] = useState<AIPlatform | 'all'>('all');
   const [expandedId, setExpandedId] = useState<number | null>(null);
@@ -43,7 +45,7 @@ export function RecordsPage({ records, onDeleteRecord, onRefresh }: RecordsPageP
 
   const handleDelete = (id: number, e: React.MouseEvent) => {
     e.stopPropagation();
-    if (confirm('Delete this record?')) {
+    if (confirm(t.records.deleteConfirm)) {
       onDeleteRecord(id);
     }
   };
@@ -64,7 +66,7 @@ export function RecordsPage({ records, onDeleteRecord, onRefresh }: RecordsPageP
           </svg>
           <input
             type="text"
-            placeholder="Search records..."
+            placeholder={t.records.searchPlaceholder}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full pl-10 pr-4 py-2 bg-tracker-accent border border-tracker-accent rounded-lg text-white text-sm placeholder-gray-500 focus:outline-none focus:border-primary-500"
@@ -81,7 +83,7 @@ export function RecordsPage({ records, onDeleteRecord, onRefresh }: RecordsPageP
                 : 'bg-tracker-accent text-gray-400 hover:text-white'
             }`}
           >
-            All ({records.length})
+            {t.records.all} ({records.length})
           </button>
           {platforms.map(platform => (
             <button
@@ -108,12 +110,12 @@ export function RecordsPage({ records, onDeleteRecord, onRefresh }: RecordsPageP
             </svg>
             <p className="text-sm">
               {records.length === 0 
-                ? 'No records yet' 
-                : 'No matching records'}
+                ? t.records.noRecords 
+                : t.records.noMatchingRecords}
             </p>
             {records.length === 0 && (
               <p className="text-xs mt-1 text-gray-600">
-                Start chatting with AI to capture interactions
+                {t.records.startChatting}
               </p>
             )}
           </div>
@@ -135,7 +137,7 @@ export function RecordsPage({ records, onDeleteRecord, onRefresh }: RecordsPageP
       {/* Footer */}
       <div className="p-3 border-t border-tracker-accent flex items-center justify-between">
         <span className="text-xs text-gray-500">
-          {filteredRecords.length} of {records.length} records
+          {interpolate(t.records.recordsCount, { filtered: filteredRecords.length, total: records.length })}
         </span>
         <button
           onClick={onRefresh}
@@ -144,7 +146,7 @@ export function RecordsPage({ records, onDeleteRecord, onRefresh }: RecordsPageP
           <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
           </svg>
-          Refresh
+          {t.common.refresh}
         </button>
       </div>
     </div>
@@ -159,6 +161,7 @@ interface RecordItemProps {
 }
 
 function RecordItem({ record, isExpanded, onToggle, onDelete }: RecordItemProps) {
+  const { t } = useLanguage();
   const timestamp = new Date(record.timestamp);
   const timeStr = timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   const dateStr = timestamp.toLocaleDateString([], { month: 'short', day: 'numeric' });
@@ -201,7 +204,7 @@ function RecordItem({ record, isExpanded, onToggle, onDelete }: RecordItemProps)
           <span className="text-xs text-primary-400 font-medium">
             {formatTokenCount(record.totalTokens)}
           </span>
-          <span className="text-xs text-gray-500">tokens</span>
+          <span className="text-xs text-gray-500">{t.common.tokens}</span>
         </div>
         
         {/* Expand Icon */}
@@ -220,7 +223,7 @@ function RecordItem({ record, isExpanded, onToggle, onDelete }: RecordItemProps)
         <div className="px-4 pb-4 space-y-3">
           {/* Input */}
           <div>
-            <div className="text-xs text-gray-500 mb-1">Input ({record.inputTokens} tokens)</div>
+            <div className="text-xs text-gray-500 mb-1">{t.records.input} ({interpolate(t.records.tokensCount, { count: record.inputTokens })})</div>
             <div className="bg-tracker-accent rounded-lg p-3 text-xs text-gray-300 max-h-24 overflow-y-auto whitespace-pre-wrap">
               {record.input}
             </div>
@@ -228,7 +231,7 @@ function RecordItem({ record, isExpanded, onToggle, onDelete }: RecordItemProps)
           
           {/* Output */}
           <div>
-            <div className="text-xs text-gray-500 mb-1">Output ({record.outputTokens} tokens)</div>
+            <div className="text-xs text-gray-500 mb-1">{t.records.output} ({interpolate(t.records.tokensCount, { count: record.outputTokens })})</div>
             <div className="bg-tracker-accent rounded-lg p-3 text-xs text-gray-300 max-h-32 overflow-y-auto whitespace-pre-wrap">
               {record.output.substring(0, 500)}{record.output.length > 500 ? '...' : ''}
             </div>
@@ -237,7 +240,7 @@ function RecordItem({ record, isExpanded, onToggle, onDelete }: RecordItemProps)
           {/* Actions */}
           <div className="flex items-center justify-between pt-2 border-t border-tracker-accent">
             <div className="text-xs text-gray-500">
-              Est. cost: ${record.estimatedCost.toFixed(6)}
+              {t.records.estCostLabel} ${record.estimatedCost.toFixed(6)}
             </div>
             <button
               onClick={onDelete}
@@ -246,7 +249,7 @@ function RecordItem({ record, isExpanded, onToggle, onDelete }: RecordItemProps)
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
               </svg>
-              Delete
+              {t.common.delete}
             </button>
           </div>
         </div>
