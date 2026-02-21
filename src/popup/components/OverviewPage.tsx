@@ -13,6 +13,7 @@ import {
 import type { StatsResponse, LaborRecord, AggregatedStats } from '@/types';
 import { formatTokenCount, formatCurrency } from '@/utils';
 import { ExportButton } from './ExportButton';
+import { useLanguage, interpolate } from '../i18n';
 
 interface OverviewPageProps {
   stats: StatsResponse;
@@ -46,34 +47,39 @@ interface StatsCardsProps {
 }
 
 function StatsCards({ stats }: StatsCardsProps) {
+  const { t } = useLanguage();
+  
   return (
     <div className="space-y-3">
       {/* Period Tabs */}
       <div className="grid grid-cols-4 gap-2">
-        <StatPeriodCard label="Today" stats={stats.today} />
-        <StatPeriodCard label="Week" stats={stats.week} />
-        <StatPeriodCard label="Month" stats={stats.month} />
-        <StatPeriodCard label="Total" stats={stats.total} highlight />
+        <StatPeriodCard label={t.overview.today} stats={stats.today} />
+        <StatPeriodCard label={t.overview.week} stats={stats.week} />
+        <StatPeriodCard label={t.overview.month} stats={stats.month} />
+        <StatPeriodCard label={t.overview.total} stats={stats.total} highlight />
       </div>
       
       {/* Detailed Stats */}
       <div className="grid grid-cols-2 gap-2">
         <div className="bg-tracker-card rounded-lg p-3">
-          <div className="text-xs text-gray-400 mb-1">Total Tokens</div>
+          <div className="text-xs text-gray-400 mb-1">{t.overview.totalTokens}</div>
           <div className="text-lg font-bold text-white">
             {formatTokenCount(stats.total.totalTokens)}
           </div>
           <div className="text-xs text-gray-500">
-            {formatTokenCount(stats.total.totalInputTokens)} in / {formatTokenCount(stats.total.totalOutputTokens)} out
+            {interpolate(t.overview.inOut, { 
+              input: formatTokenCount(stats.total.totalInputTokens), 
+              output: formatTokenCount(stats.total.totalOutputTokens) 
+            })}
           </div>
         </div>
         <div className="bg-tracker-card rounded-lg p-3">
-          <div className="text-xs text-gray-400 mb-1">Est. Cost</div>
+          <div className="text-xs text-gray-400 mb-1">{t.overview.estCost}</div>
           <div className="text-lg font-bold text-primary-400">
             {formatCurrency(stats.total.totalEstimatedCost)}
           </div>
           <div className="text-xs text-gray-500">
-            {stats.total.totalRecords} interactions
+            {stats.total.totalRecords} {t.overview.interactions}
           </div>
         </div>
       </div>
@@ -106,12 +112,14 @@ interface ModelDistributionProps {
 }
 
 function ModelDistribution({ data }: ModelDistributionProps) {
+  const { t } = useLanguage();
+  
   if (data.length === 0) {
     return (
       <div className="bg-tracker-card rounded-lg p-4">
-        <h3 className="text-sm font-medium text-gray-400 mb-3">Model Distribution</h3>
+        <h3 className="text-sm font-medium text-gray-400 mb-3">{t.overview.modelDistribution}</h3>
         <div className="h-32 flex items-center justify-center text-gray-500 text-sm">
-          No data yet
+          {t.overview.noData}
         </div>
       </div>
     );
@@ -128,7 +136,7 @@ function ModelDistribution({ data }: ModelDistributionProps) {
 
   return (
     <div className="bg-tracker-card rounded-lg p-4">
-      <h3 className="text-sm font-medium text-gray-400 mb-3">Model Distribution</h3>
+      <h3 className="text-sm font-medium text-gray-400 mb-3">{t.overview.modelDistribution}</h3>
       <div className="grid grid-cols-2 gap-4">
         {/* Pie Chart */}
         <div className="h-32">
@@ -156,7 +164,7 @@ function ModelDistribution({ data }: ModelDistributionProps) {
                   color: '#fff',
                   fontSize: '12px',
                 }}
-                formatter={(value: number) => [`${value} (${((value / total) * 100).toFixed(0)}%)`, 'Count']}
+                formatter={(value: number) => [`${value} (${((value / total) * 100).toFixed(0)}%)`, t.overview.count]}
               />
             </PieChart>
           </ResponsiveContainer>
@@ -185,6 +193,8 @@ interface UsageTrendProps {
 }
 
 function UsageTrend({ dailyStats }: UsageTrendProps) {
+  const { t } = useLanguage();
+  
   // Aggregate stats by date
   const aggregatedData = aggregateByDate(dailyStats);
   
@@ -194,9 +204,9 @@ function UsageTrend({ dailyStats }: UsageTrendProps) {
   if (chartData.length === 0) {
     return (
       <div className="bg-tracker-card rounded-lg p-4">
-        <h3 className="text-sm font-medium text-gray-400 mb-3">Usage Trend (30 Days)</h3>
+        <h3 className="text-sm font-medium text-gray-400 mb-3">{t.overview.usageTrend}</h3>
         <div className="h-40 flex items-center justify-center text-gray-500 text-sm">
-          No data yet. Start using AI to see your trends!
+          {t.overview.noTrendData}
         </div>
       </div>
     );
@@ -204,7 +214,7 @@ function UsageTrend({ dailyStats }: UsageTrendProps) {
 
   return (
     <div className="bg-tracker-card rounded-lg p-4">
-      <h3 className="text-sm font-medium text-gray-400 mb-3">Usage Trend (30 Days)</h3>
+      <h3 className="text-sm font-medium text-gray-400 mb-3">{t.overview.usageTrend}</h3>
       <div className="h-40">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={chartData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
@@ -243,7 +253,7 @@ function UsageTrend({ dailyStats }: UsageTrendProps) {
               }}
               formatter={(value: number, name: string) => {
                 if (name === 'tokens') {
-                  return [value.toLocaleString(), 'Tokens'];
+                  return [value.toLocaleString(), t.common.tokens];
                 }
                 return [value, name];
               }}
