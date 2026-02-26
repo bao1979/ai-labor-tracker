@@ -1,137 +1,161 @@
-# AI 劳动记录器 (AI Labor Tracker)
+[English](#) | [简体中文](README_CN.md)
 
-> 一个用于追踪和量化 AI 交互劳动价值的浏览器扩展
+# AI Labor Tracker
 
-## 📖 项目介绍
+> A browser extension for tracking and quantifying the labor value of AI interactions
 
-AI 劳动记录器是一个创新的浏览器扩展，旨在帮助用户追踪、记录和量化与 AI 助手（如 DeepSeek、ChatGPT、Claude 等）的交互数据。通过估算 Token 消耗和对应的劳动价值，本项目为 AI 劳动凭证系统的建立提供基础数据支持。
+## 📖 Introduction
 
-### 🎯 愿景
+AI Labor Tracker is an innovative browser extension designed to help users track, record, and quantify interaction data with AI assistants (such as DeepSeek, ChatGPT, Claude, Kimi, Qianwen, Doubao, Tiangong, and more). By estimating token consumption and corresponding labor value, this project provides foundational data support for establishing an AI labor credential system.
 
-在 AI 时代，人机协作已成为常态。本项目致力于：
-- **量化 AI 劳动**：将 AI 交互转化为可度量的劳动凭证
-- **提高透明度**：让用户了解 AI 使用的真实成本和价值
-- **数据主权**：确保用户完全掌控自己的交互数据
-- **促进公平**：为未来的 AI 劳动价值分配提供数据基础
+### 🎯 Vision
 
-## ✨ 功能特性
+In the AI era, human-machine collaboration has become the norm. This project is dedicated to:
+- **Quantifying AI Labor**: Converting AI interactions into measurable labor credentials
+- **Improving Transparency**: Helping users understand the true cost and value of AI usage
+- **Data Sovereignty**: Ensuring users maintain complete control over their interaction data
+- **Promoting Fairness**: Providing data foundation for future AI labor value distribution
 
-### 核心功能
-- 🔍 **自动追踪**：自动检测并记录与 AI 平台的对话
-- 📊 **Token 统计**：精确统计输入/输出 Token 数量
-- 💰 **成本估算**：基于各平台定价估算 API 使用成本
-- 👷 **劳动价值计算**：将 AI 输出转换为等效人工劳动价值
-- 📈 **数据可视化**：直观展示使用趋势和统计图表
+## ✨ Features
 
-### 支持的平台
-- DeepSeek (chat.deepseek.com)
-- ChatGPT (chatgpt.com)
-- Claude (claude.ai)
-- 可扩展支持其他平台
+### Core Features
+- 🔍 **Automatic Tracking**: Automatically detect and record conversations with AI platforms
+- 📊 **Token Statistics**: Precisely count input/output token quantities
+- 💰 **Cost Estimation**: Estimate API usage costs based on each platform's pricing
+- 👷 **Labor Value Calculation**: Convert AI output into equivalent human labor value
+- 📈 **Data Visualization**: Intuitively display usage trends and statistical charts
+- 🌐 **Multi-language UI**: Support for English and Chinese (中文) interface
 
-### 数据管理
-- 📁 **本地存储**：所有数据安全存储在本地，保护隐私
-- 📤 **数据导出**：支持 JSON 和 CSV 格式导出
-- 🗑️ **数据清理**：灵活的数据保留策略设置
-- 🔍 **记录搜索**：按平台、模型、日期等条件筛选记录
+### Supported AI Platforms
 
-## 🚀 安装指南
+#### International Platforms
+| Platform | Website | Status |
+|----------|---------|--------|
+| DeepSeek | chat.deepseek.com | ✅ Supported |
+| ChatGPT | chatgpt.com | ✅ Supported |
+| Claude | claude.ai | ✅ Supported |
 
-### 环境要求
-- Node.js 18.0 或更高版本
-- pnpm、npm 或 yarn 包管理器
-- Microsoft Edge 或 Google Chrome 浏览器
+#### China's Mainstream AI Platforms
+| Platform | Chinese Name | Website | Status |
+|----------|--------------|---------|--------|
+| Kimi | Kimi (月之暗面) | kimi.moonshot.cn | ✅ Supported |
+| Qianwen | 通义千问 | tongyi.aliyun.com | ✅ Supported |
+| Doubao | 豆包 | doubao.com | ✅ Supported |
+| Tiangong | 天工 | tiangong.cn | ✅ Supported |
 
-### 开发安装
+> The extension architecture is designed to be extensible, making it easy to add support for additional platforms.
 
-1. **克隆仓库**
+### Data Management
+- 📁 **Local Storage**: All data is securely stored locally to protect privacy
+- 📤 **Data Export**: Support for JSON and CSV format exports
+- 🗑️ **Data Cleanup**: Flexible data retention policy settings
+- 🔍 **Record Search**: Filter records by platform, model, date, and more
+
+## 🚀 Installation Guide
+
+### Requirements
+- Node.js 18.0 or higher
+- pnpm, npm, or yarn package manager
+- Microsoft Edge or Google Chrome browser
+
+### Development Installation
+
+1. **Clone the repository**
 ```bash
 git clone https://github.com/bao1979/ai-labor-tracker.git
 cd ai-labor-tracker
 ```
 
-2. **安装依赖**
+2. **Install dependencies**
 ```bash
-# 使用 npm
+# Using npm
 npm install
 
-# 或使用 pnpm
+# Or using pnpm
 pnpm install
 
-# 或使用 yarn
+# Or using yarn
 yarn install
 ```
 
-3. **开发模式运行**
+3. **Run in development mode**
 ```bash
 npm run dev
 ```
 
-4. **构建生产版本**
+4. **Build production version**
 ```bash
 npm run build
 ```
 
-### 加载扩展到浏览器
+### Load Extension into Browser
 
 #### Microsoft Edge
-1. 打开 `edge://extensions/`
-2. 开启「开发人员模式」
-3. 点击「加载解压缩的扩展」
-4. 选择项目的 `dist` 目录
+1. Open `edge://extensions/`
+2. Enable "Developer mode"
+3. Click "Load unpacked"
+4. Select the project's `dist` directory
 
 #### Google Chrome
-1. 打开 `chrome://extensions/`
-2. 开启「开发者模式」
-3. 点击「加载已解压的扩展程序」
-4. 选择项目的 `dist` 目录
+1. Open `chrome://extensions/`
+2. Enable "Developer mode"
+3. Click "Load unpacked"
+4. Select the project's `dist` directory
 
-## 📖 使用说明
+## 📖 Usage Guide
 
-### 基本使用
+### Basic Usage
 
-1. **启用追踪**
-   - 点击浏览器工具栏中的扩展图标
-   - 在设置页面确保追踪功能已启用
+1. **Enable Tracking**
+   - Click the extension icon in the browser toolbar
+   - Ensure tracking is enabled in the settings page
 
-2. **进行 AI 对话**
-   - 正常使用支持的 AI 平台进行对话
-   - 扩展会自动在后台记录交互数据
+2. **Have AI Conversations**
+   - Use any supported AI platform for conversations as normal
+   - The extension will automatically record interaction data in the background
 
-3. **查看统计**
-   - 点击扩展图标打开弹出窗口
-   - 在「概览」页面查看今日/本周/本月的统计数据
-   - 在「记录」页面查看详细的交互历史
+3. **View Statistics**
+   - Click the extension icon to open the popup window
+   - View today/week/month statistics on the "Overview" page
+   - View detailed interaction history on the "Records" page
 
-4. **导出数据**
-   - 在「设置」页面点击导出按钮
-   - 选择 JSON 或 CSV 格式下载数据
+4. **Export Data**
+   - Click the export button on the "Settings" page
+   - Choose JSON or CSV format to download your data
 
-### 设置选项
+### Language Settings
 
-| 设置项 | 说明 |
-|--------|------|
-| 启用追踪 | 全局开关，控制是否记录交互 |
-| 平台选择 | 选择需要追踪的 AI 平台 |
-| 数据保留天数 | 设置历史数据自动清理周期 |
-| 主题 | 切换深色/浅色主题 |
+The extension supports both English and Chinese interfaces:
+1. Click the extension icon to open the popup
+2. Go to the "Settings" tab
+3. Find the "Language" option
+4. Select your preferred language (English / 中文)
 
-## 🏗️ 技术架构
+### Configuration Options
 
-### 技术栈
-- **构建工具**：[Vite](https://vitejs.dev/) - 下一代前端构建工具
-- **前端框架**：[React 18](https://react.dev/) - 用户界面库
-- **开发语言**：[TypeScript](https://www.typescriptlang.org/) - 类型安全的 JavaScript
-- **扩展框架**：[CRXJS](https://crxjs.dev/vite-plugin/) - Vite 的浏览器扩展插件
-- **样式方案**：[Tailwind CSS](https://tailwindcss.com/) - 原子化 CSS 框架
-- **数据可视化**：[Recharts](https://recharts.org/) - React 图表库
-- **本地数据库**：[Dexie.js](https://dexie.org/) - IndexedDB 封装库
+| Setting | Description |
+|---------|-------------|
+| Enable Capture | Global switch to control whether interactions are recorded |
+| Platform Selection | Select which AI platforms to track |
+| Data Retention Days | Set the automatic cleanup period for historical data |
+| Language | Switch between English and Chinese interface |
 
-### 扩展架构
+## 🏗️ Technical Architecture
+
+### Tech Stack
+- **Build Tool**: [Vite](https://vitejs.dev/) - Next-generation frontend build tool
+- **Frontend Framework**: [React 18](https://react.dev/) - User interface library
+- **Development Language**: [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript
+- **Extension Framework**: [CRXJS](https://crxjs.dev/vite-plugin/) - Vite plugin for browser extensions
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- **Data Visualization**: [Recharts](https://recharts.org/) - React charting library
+- **Local Database**: [Dexie.js](https://dexie.org/) - IndexedDB wrapper library
+
+### Extension Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                     浏览器扩展架构                           │
+│                 Browser Extension Architecture               │
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
 │  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐     │
@@ -151,83 +175,89 @@ npm run build
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### 数据流
+### Data Flow
 
-1. **Content Script**：注入到目标网页，捕获 AI 对话内容
-2. **Background Service Worker**：处理消息、管理数据存储
-3. **Popup UI**：展示统计数据和设置界面
-4. **IndexedDB**：持久化存储所有数据
+1. **Content Script**: Injected into target web pages to capture AI conversation content
+2. **Background Service Worker**: Handles messages and manages data storage
+3. **Popup UI**: Displays statistics and settings interface
+4. **IndexedDB**: Persistently stores all data
 
-## 📁 目录结构
+## 📁 Directory Structure
 
 ```
 ai-labor-tracker/
 ├── public/
-│   └── icons/                 # 扩展图标资源
+│   └── icons/                 # Extension icon resources
 │       ├── icon16.png
 │       ├── icon32.png
 │       ├── icon48.png
-│       ├── icon128.png
-│       └── README.md
+│       └── icon128.png
 ├── src/
-│   ├── background/           # 后台服务工作线程
-│   │   └── index.ts         # 消息处理和数据管理
-│   ├── content/             # 内容脚本
-│   │   └── deepseek.ts      # DeepSeek 平台适配器
-│   ├── popup/               # 弹出窗口 UI
-│   │   ├── components/      # React 组件
-│   │   ├── App.tsx         # 主应用组件
-│   │   ├── main.tsx        # 入口文件
-│   │   ├── index.html      # HTML 模板
-│   │   └── styles.css      # 全局样式
-│   ├── storage/             # 数据存储层
-│   │   ├── db.ts           # Dexie 数据库定义
-│   │   └── index.ts        # 存储 API
-│   ├── types/               # TypeScript 类型定义
+│   ├── background/           # Background service worker
+│   │   └── index.ts         # Message handling and data management
+│   ├── content/             # Content scripts
+│   │   ├── deepseek.ts      # DeepSeek platform adapter
+│   │   ├── kimi.ts          # Kimi platform adapter
+│   │   ├── qianwen.ts       # Qianwen platform adapter
+│   │   ├── doubao.ts        # Doubao platform adapter
+│   │   └── tiangong.ts      # Tiangong platform adapter
+│   ├── popup/               # Popup window UI
+│   │   ├── components/      # React components
+│   │   ├── i18n/            # Internationalization (i18n)
+│   │   │   └── locales/     # Language files (en.ts, zh.ts)
+│   │   ├── App.tsx          # Main application component
+│   │   ├── main.tsx         # Entry file
+│   │   ├── index.html       # HTML template
+│   │   └── styles.css       # Global styles
+│   ├── storage/             # Data storage layer
+│   │   ├── db.ts            # Dexie database definition
+│   │   └── index.ts         # Storage API
+│   ├── types/               # TypeScript type definitions
 │   │   └── index.ts
-│   ├── utils/               # 工具函数
-│   │   ├── export.ts       # 数据导出
-│   │   ├── pricing.ts      # 价格计算
-│   │   ├── tokens.ts       # Token 估算
+│   ├── utils/               # Utility functions
+│   │   ├── export.ts        # Data export
+│   │   ├── pricing.ts       # Price calculation
+│   │   ├── tokens.ts        # Token estimation
 │   │   └── index.ts
 │   └── vite-env.d.ts
-├── manifest.json             # 扩展清单文件
-├── manifest.config.ts        # 清单配置
+├── manifest.json             # Extension manifest file
+├── manifest.config.ts        # Manifest configuration
 ├── package.json
 ├── tsconfig.json
 ├── tsconfig.node.json
 ├── vite.config.ts
 ├── tailwind.config.js
 ├── postcss.config.js
-└── README.md
+├── README.md                 # English documentation
+└── README_CN.md              # Chinese documentation
 ```
 
-## 🛠️ 开发指南
+## 🛠️ Development Setup
 
-### 开发命令
+### Development Commands
 
 ```bash
-# 启动开发服务器（支持热重载）
+# Start development server (with hot reload)
 npm run dev
 
-# 构建生产版本
+# Build production version
 npm run build
 
-# 预览构建结果
+# Preview build result
 npm run preview
 
-# 代码检查
+# Code linting
 npm run lint
 ```
 
-### 添加新平台支持
+### Adding New Platform Support
 
-1. 在 `src/types/index.ts` 中添加平台类型：
+1. Add platform type in `src/types/index.ts`:
 ```typescript
-export type AIPlatform = 'deepseek' | 'chatgpt' | 'claude' | 'newplatform' | 'other';
+export type AIPlatform = 'deepseek' | 'chatgpt' | 'claude' | 'kimi' | 'qianwen' | 'doubao' | 'tiangong' | 'newplatform' | 'other';
 ```
 
-2. 在 `src/utils/pricing.ts` 中添加定价配置：
+2. Add pricing configuration in `src/utils/pricing.ts`:
 ```typescript
 newplatform: {
   platform: 'newplatform',
@@ -237,83 +267,59 @@ newplatform: {
 },
 ```
 
-3. 创建内容脚本 `src/content/newplatform.ts`
+3. Create content script `src/content/newplatform.ts`
 
-4. 在 `manifest.json` 中添加权限和脚本配置
+4. Add permissions and script configuration in `manifest.json`
 
-### 代码规范
+### Code Standards
 
-- 使用 TypeScript 编写所有代码
-- 遵循 ESLint 规则进行代码检查
-- 使用 Tailwind CSS 编写样式
-- 组件使用函数式组件和 React Hooks
+- Write all code in TypeScript
+- Follow ESLint rules for code linting
+- Use Tailwind CSS for styling
+- Use functional components and React Hooks
 
-## 🤝 贡献指南
+## 🤝 Contributing
 
-我们欢迎任何形式的贡献！
+We welcome contributions of all kinds!
 
-### 如何贡献
+### How to Contribute
 
-1. **Fork 本仓库**
-2. **创建特性分支**
+1. **Fork the repository**
+2. **Create a feature branch**
    ```bash
    git checkout -b feature/amazing-feature
    ```
-3. **提交更改**
+3. **Commit your changes**
    ```bash
-   git commit -m 'feat: 添加某个很棒的功能'
+   git commit -m 'feat: add some amazing feature'
    ```
-4. **推送到分支**
+4. **Push to the branch**
    ```bash
    git push origin feature/amazing-feature
    ```
-5. **创建 Pull Request**
+5. **Create a Pull Request**
 
-### 提交规范
+### Commit Guidelines
 
-请使用语义化提交信息：
-- `feat:` 新功能
-- `fix:` 修复问题
-- `docs:` 文档更新
-- `style:` 代码格式（不影响功能）
-- `refactor:` 代码重构
-- `test:` 测试相关
-- `chore:` 构建/工具相关
+Please use semantic commit messages:
+- `feat:` New feature
+- `fix:` Bug fix
+- `docs:` Documentation update
+- `style:` Code formatting (no functional changes)
+- `refactor:` Code refactoring
+- `test:` Test related
+- `chore:` Build/tooling related
 
-### 报告问题
+### Reporting Issues
 
-如果您发现任何问题，请通过 [GitHub Issues](https://github.com/bao1979/ai-labor-tracker/issues) 报告。
+If you find any issues, please report them via [GitHub Issues](https://github.com/bao1979/ai-labor-tracker/issues).
 
-## 📄 许可证
+## 📄 License
 
-本项目采用 [MIT 许可证](LICENSE) 开源。
-
-```
-MIT License
-
-Copyright (c) 2024 AI Labor Tracker
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
+This project is open-sourced under the [MIT License](LICENSE).
 
 ---
 
 <p align="center">
-  用 ❤️ 构建 | AI 劳动凭证系统
+  Built with ❤️ | AI Labor Credential System
 </p>
